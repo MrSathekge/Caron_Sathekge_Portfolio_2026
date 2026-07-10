@@ -395,8 +395,27 @@ a { color: inherit; text-decoration: none; }
   gap: 28px;
   padding: 40px 0;
   border-top: 1px solid var(--line);
+  position: relative;
+  transition: transform 0.35s ease, opacity 0.35s ease, filter 0.35s ease;
 }
 .work-item:last-child { border-bottom: 1px solid var(--line); }
+
+@media (hover: hover) and (pointer: fine) {
+  .work-list:hover .work-item {
+    opacity: 0.5;
+    filter: blur(1.5px);
+  }
+  .work-list:hover .work-item:hover {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1.02);
+    z-index: 2;
+    background: var(--card);
+    border-radius: var(--radius);
+    border-top-color: transparent;
+    box-shadow: var(--shadow);
+  }
+}
 .work-num {
   font-family: var(--font-display);
   font-size: 0.95rem;
@@ -696,6 +715,91 @@ a { color: inherit; text-decoration: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none; }
+}
+
+/* ---------- worked-with ---------- */
+.worked-with {
+  position: relative;
+  z-index: 1;
+  padding: 56px 0 60px;
+  text-align: center;
+}
+.worked-with-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 30px;
+}
+.logo-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 56px;
+  row-gap: 28px;
+}
+.wm {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink-faint);
+  letter-spacing: -0.01em;
+  filter: grayscale(100%);
+  opacity: 0.75;
+  transition: opacity 0.25s ease, filter 0.25s ease, color 0.25s ease;
+  cursor: default;
+}
+.wm:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+.wm-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.wm-logo {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+.wm-logo[alt="CSG International"] {
+  height: 42px;
+}
+.wm-logo-savvysaver {
+  height: 46px;
+}
+.wm-logo-mono {
+  opacity: 0.6;
+  filter: grayscale(100%);
+  transition: opacity 0.25s ease, filter 0.25s ease;
+}
+.wm-item:hover .wm-logo-mono {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+:root[data-theme="dark"] .wm-logo-invert {
+  filter: grayscale(100%) invert(1) brightness(1.6);
+}
+:root[data-theme="dark"] .wm-item:hover .wm-logo-invert {
+  filter: grayscale(0%) invert(1) brightness(1.6);
+}
+.wm-sub {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--ink-faint);
+  opacity: 0.75;
+}
+
+@media (max-width: 720px) {
+  .logo-row { gap: 32px; row-gap: 20px; }
+  .wm { font-size: 1.2rem; }
+  .wm-logo { height: 24px; }
 }
 
 /* ---------- responsive ---------- */
