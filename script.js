@@ -36,14 +36,16 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // scroll progress bar
+  // scroll progress bar + scroll-to-top button
   var progress = document.getElementById('scrollProgress');
+  var scrollTopBtn = document.getElementById('scrollTop');
   var ticking = false;
   function updateProgress() {
     var scrollTop = window.scrollY;
     var docHeight = document.documentElement.scrollHeight - window.innerHeight;
     var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
     progress.style.width = pct + '%';
+    scrollTopBtn.classList.toggle('visible', scrollTop > 600);
     ticking = false;
   }
   window.addEventListener('scroll', function () {
@@ -53,6 +55,10 @@
     }
   }, { passive: true });
   updateProgress();
+
+  scrollTopBtn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
   // hero cursor glow (mouse-capable devices only)
   var hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
